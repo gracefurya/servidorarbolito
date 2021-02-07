@@ -7,3 +7,13 @@ type ZonaVerde struct {
 	Direccion   string `json:"direccion"`
 	IDDistrito  int    `json:"iddistrito"`
 }
+
+var queryZonaVerde = `CREATE TABLE if NOT EXIST zonaverde(
+	idzonaverde int primary KEY not null AUTO_INCREMENT,
+	nombre varchar(45),
+	direccion varchar(45),
+	distrito_id int,
+	CONSTRAINT fk_zonaverde_distrito
+		FOREIGN KEY (distrito_id) REFERENCES distrito(iddistrito)
+		ON DELETE CASCADE
+)`

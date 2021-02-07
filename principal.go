@@ -1,9 +1,12 @@
 package main
 
-import(
+import (
 	"fmt"
+
+	"./models"
 )
 
-func main(){
+func main() {
+	models.CrearTablaPersona()
 	fmt.Println("hola")
 }
