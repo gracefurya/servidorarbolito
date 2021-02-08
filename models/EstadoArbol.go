@@ -14,6 +14,11 @@ var queryEstadoArbol = `CREATE TABLE if NOT EXISTS EstadoArbol(
 	dirfoto varchar(60),
 	arbol_id int,
 	CONSTRAINT fk_EstadoArbol_arbol
-		FOREIGN KEY (arbol_id) REFERENCES EstadoArbol(idarbol)
+		FOREIGN KEY (arbol_id) REFERENCES arbol(idarbol)
 		ON DELETE CASCADE
 	)`
+
+//CrearTablaEstadoArbol crea la tabla del estado del arbol
+func CrearTablaEstadoArbol() {
+	EjecutarExec(queryEstadoArbol)
+}

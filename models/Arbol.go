@@ -23,8 +23,13 @@ var queryArbol = `CREATE TABLE if NOT EXISTS arbol(
 	dirfoto varchar(120),
 	persona_id int not null,
 	CONSTRAINT fk_arbol_persona
-		FOREIGN KEY (persona_id) REFERENCE persona(idpersona),
+		FOREIGN KEY (persona_id) REFERENCES persona(idpersona),
 	zonaverde_id int not null,
 	CONSTRAINT fk_arbol_zonaverde
 		FOREIGN KEY (zonaverde_id) REFERENCES zonaverde(idzonaverde)
 )`
+
+//CrearTablaArbol se crea una tabla para el objeto arbol
+func CrearTablaArbol() {
+	EjecutarExec(queryArbol)
+}

@@ -12,3 +12,8 @@ var queryDistrito = `CREATE TABLE if NOT EXISTS distrito(
 	nombre varchar(45),
 	codigo int
 )`
+
+//CrearTablaDistrito Crea la tabla de distrito en la base de datos
+func CrearTablaDistrito() {
+	EjecutarExec(queryDistrito)
+}

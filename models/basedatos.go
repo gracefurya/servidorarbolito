@@ -43,13 +43,13 @@ func EjecutarExec(query string, args ...interface{}) (sql.Result, error) {
 }
 
 //EjecutarQuery ejecuta un query y devuelve filas de una tabla
-func EjecutarQuery(query string, args ...interface{}) *sql.Rows {
+func EjecutarQuery(query string, args ...interface{}) (*sql.Rows, error) {
 	rows, err := db.Query(query, args...)
 	if err != nil {
 		log.Println(err)
-		return nil
+		return nil, err
 	}
-	return rows
+	return rows, nil
 }
 
 //Ping hace ping a la base de datos

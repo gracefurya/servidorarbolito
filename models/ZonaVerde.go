@@ -8,7 +8,7 @@ type ZonaVerde struct {
 	IDDistrito  int    `json:"iddistrito"`
 }
 
-var queryZonaVerde = `CREATE TABLE if NOT EXIST zonaverde(
+var queryZonaVerde = `CREATE TABLE if NOT EXISTS zonaverde(
 	idzonaverde int primary KEY not null AUTO_INCREMENT,
 	nombre varchar(45),
 	direccion varchar(45),
@@ -17,3 +17,8 @@ var queryZonaVerde = `CREATE TABLE if NOT EXIST zonaverde(
 		FOREIGN KEY (distrito_id) REFERENCES distrito(iddistrito)
 		ON DELETE CASCADE
 )`
+
+//CrearTablaZonaVerde crea la tabla zona verde
+func CrearTablaZonaVerde() {
+	EjecutarExec(queryZonaVerde)
+}
