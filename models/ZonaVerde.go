@@ -8,7 +8,11 @@ type ZonaVerde struct {
 	IDDistrito  int    `json:"iddistrito"`
 }
 
+<<<<<<< HEAD
 //ZonasVerdes Array de zonas verdes
+=======
+//ZonasVerdes array de zonas verdes
+>>>>>>> 2f6cc10ecdc37ea4d4ef44f4a9fd6e2c2132657e
 type ZonasVerdes []ZonaVerde
 
 var queryZonaVerde = `CREATE TABLE if NOT EXISTS zonaverde(
@@ -26,15 +30,23 @@ func CrearTablaZonaVerde() {
 	EjecutarExec(queryZonaVerde)
 }
 
+<<<<<<< HEAD
 //AgregarZonaVerde Agrega una zona verde en la base de datos
 func (z *ZonaVerde) AgregarZonaVerde() error {
 	query := `INSERT INTO zonaverde(nombre,direccion,distrito_id) VALUES (?,?,?)`
 	_, err := EjecutarExec(query, &z.Nombre, &z.Direccion, &z.IDDistrito)
+=======
+//AgregarZonaVerde agrega una zona verde
+func (z *ZonaVerde) AgregarZonaVerde() error {
+	query := `INSERT INTO zonaverde(nombre,direccion,iddistrito) VALUE (?,?,?)`
+	_, err := EjecutarExec(query, &z.Nombre, &z.Direccion, &z.IDZonaVerde)
+>>>>>>> 2f6cc10ecdc37ea4d4ef44f4a9fd6e2c2132657e
 	if err != nil {
 		return err
 	}
 	return nil
 }
+<<<<<<< HEAD
 
 //GetZonaVerdeByID Obtiene una zona verde mediante su ID
 func GetZonaVerdeByID(id int) (*ZonaVerde, error) {
@@ -85,3 +97,5 @@ func GetZonasVerdesByDistrito(iddistrito int) (ZonasVerdes, error) {
 	}
 	return zonasverdes, nil
 }
+=======
+>>>>>>> 2f6cc10ecdc37ea4d4ef44f4a9fd6e2c2132657e
