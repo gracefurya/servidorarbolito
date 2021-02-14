@@ -17,3 +17,13 @@ var queryDistrito = `CREATE TABLE if NOT EXISTS distrito(
 func CrearTablaDistrito() {
 	EjecutarExec(queryDistrito)
 }
+
+//AgregarDistrito Agrega un distrito en la base de datos
+func (d *Distrito) AgregarDistrito() error {
+	query := `INSERT INTO distrito(iddistrito,nombre,codigo) VALUES (?,?,?)`
+	_, err := EjecutarExec(query, &d.IDDistrito, &d.Nombre, &d.Codigo)
+	if err != nil {
+		return err
+	}
+	return nil
+}
