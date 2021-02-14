@@ -8,6 +8,9 @@ type ZonaVerde struct {
 	IDDistrito  int    `json:"iddistrito"`
 }
 
+//ZonasVerdes array de zonas verdes
+type ZonasVerdes []ZonaVerde
+
 var queryZonaVerde = `CREATE TABLE if NOT EXISTS zonaverde(
 	idzonaverde int primary KEY not null AUTO_INCREMENT,
 	nombre varchar(45),
@@ -21,4 +24,14 @@ var queryZonaVerde = `CREATE TABLE if NOT EXISTS zonaverde(
 //CrearTablaZonaVerde crea la tabla zona verde
 func CrearTablaZonaVerde() {
 	EjecutarExec(queryZonaVerde)
+}
+
+//AgregarZonaVerde agrega una zona verde
+func (z *ZonaVerde) AgregarZonaVerde() error {
+	query := `INSERT INTO zonaverde(nombre,direccion,iddistrito) VALUE (?,?,?)`
+	_, err := EjecutarExec(query, &z.Nombre, &z.Direccion, &z.IDZonaVerde)
+	if err != nil {
+		return err
+	}
+	return nil
 }
