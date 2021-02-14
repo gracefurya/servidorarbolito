@@ -43,11 +43,10 @@ func ObtenerUsuario(id int) (*Persona, error) {
 	query := `SELECT idpersona,nombre,paterno,materno,carnetidentidad,telefono,celular FROM persona
 		WHERE idpersona=?`
 	rows, err := EjecutarQuery(query, id)
+	defer rows.Close()
 	if err != nil {
 		return nil, err
 	}
-
-	defer rows.Close()
 
 	persona := &Persona{}
 
@@ -62,12 +61,12 @@ func ObtenerUsuarios() (Personas, error) {
 	query := `SELECT idpersona,nombre,paterno,materno,carnetidentidad,telefono,celular FROM persona`
 
 	rows, err := EjecutarQuery(query)
+	defer rows.Close()
 
 	if err != nil {
 		return nil, err
 	}
 
-	defer rows.Close()
 	personas := Personas{}
 	for rows.Next() {
 		persona := Persona{}
