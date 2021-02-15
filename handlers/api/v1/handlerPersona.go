@@ -37,6 +37,25 @@ func GetPersonaByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//GetPersonaByCi devuleve una persona si encuentra su ci
+func GetPersonaByCi(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		vars := mux.Vars(r)
+		re := vars["cipersona"]
+
+		persona, err := models.ObtenerUsuarioByCI(re)
+		if err != nil {
+			models.SendUnprocessableEntity(w)
+			return
+		}
+		if persona.IDPersona == 0 {
+			models.SendNotFound(w)
+			return
+		}
+		models.SendData(w, persona)
+	}
+}
+
 //AddPersona agregar persona
 func AddPersona(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {

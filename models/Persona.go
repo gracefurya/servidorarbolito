@@ -56,6 +56,24 @@ func ObtenerUsuario(id int) (*Persona, error) {
 	return persona, nil
 }
 
+//ObtenerUsuarioByCI Obtiene un usuario por su ci
+func ObtenerUsuarioByCI(ci string) (*Persona, error) {
+	query := `SELECT idpersona,nombre,paterno,materno,carnetidentidad,telefono,celular FROM persona
+		WHERE carnetidentidad=?`
+	rows, err := EjecutarQuery(query, ci)
+	defer rows.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	persona := &Persona{}
+
+	if rows.Next() {
+		rows.Scan(&persona.IDPersona, &persona.Nombre, &persona.Paterno, &persona.Materno, &persona.CarnetIdentidad, &persona.Telefono, &persona.Celular)
+	}
+	return persona, nil
+}
+
 //ObtenerUsuarios devuleve todos los usuarios de una tabla
 func ObtenerUsuarios() (Personas, error) {
 	query := `SELECT idpersona,nombre,paterno,materno,carnetidentidad,telefono,celular FROM persona`

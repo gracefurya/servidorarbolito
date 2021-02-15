@@ -15,6 +15,7 @@ func main() {
 	fmt.Println("hola")
 	mux := mux.NewRouter()
 	mux.HandleFunc("/api/v1/persona/{idpersona:[0-9]+}", v1.GetPersonaByID).Methods("GET")
+	mux.HandleFunc("/api/v1/persona/ci/{cipersona}", v1.GetPersonaByCi).Methods("GET")
 	mux.HandleFunc("/api/v1/persona", v1.AddPersona).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8080", mux))
