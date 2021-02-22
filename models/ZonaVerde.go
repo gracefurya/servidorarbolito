@@ -71,7 +71,7 @@ func GetZonasVerdes() (ZonasVerdes, error) {
 
 //GetZonasVerdesByDistrito Obtiene todas las zonas verdes de un ditrito
 func GetZonasVerdesByDistrito(iddistrito int) (ZonasVerdes, error) {
-	query := `SELECT idzonaverde,nombre,direccion,distrito_id FROM zonaverde WHERE distrito_id=?`
+	query := `SELECT idzonaverde,nombre,distrito_id,direccion FROM zonaverde WHERE distrito_id=?`
 	rows, err := EjecutarQuery(query, iddistrito)
 	defer rows.Close()
 	if err != nil {
@@ -80,7 +80,7 @@ func GetZonasVerdesByDistrito(iddistrito int) (ZonasVerdes, error) {
 	zonasverdes := ZonasVerdes{}
 	for rows.Next() {
 		zv := ZonaVerde{}
-		rows.Scan(&zv.IDZonaVerde, &zv.Nombre, &zv.Direccion, &zv.IDDistrito)
+		rows.Scan(&zv.IDZonaVerde, &zv.Nombre, &zv.IDDistrito, &zv.Direccion)
 		zonasverdes = append(zonasverdes, zv)
 	}
 	return zonasverdes, nil

@@ -17,7 +17,8 @@ func main() {
 	mux.HandleFunc("/api/v1/persona/{idpersona:[0-9]+}", v1.GetPersonaByID).Methods("GET")
 	mux.HandleFunc("/api/v1/persona/ci/{cipersona}", v1.GetPersonaByCi).Methods("GET")
 	mux.HandleFunc("/api/v1/persona", v1.AddPersona).Methods("POST")
-
+	mux.HandleFunc("/api/v1/distrito", v1.GetDistritos).Methods("GET")
+	mux.HandleFunc("/api/v1/zonaverde/distrito/{iddistrito:[0-9]+}", v1.GetZonasVerdesByDistrito).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 
