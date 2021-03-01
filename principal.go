@@ -19,6 +19,9 @@ func main() {
 	mux.HandleFunc("/api/v1/persona", v1.AddPersona).Methods("POST")
 	mux.HandleFunc("/api/v1/distrito", v1.GetDistritos).Methods("GET")
 	mux.HandleFunc("/api/v1/zonaverde/distrito/{iddistrito:[0-9]+}", v1.GetZonasVerdesByDistrito).Methods("GET")
+	mux.HandleFunc("/api/v1/arbolito", v1.AddArbolito).Methods("POST")
+	fs := http.FileServer(http.Dir("recursos"))
+	mux.PathPrefix("/recursos/").Handler(http.StripPrefix("/recursos/", fs))
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 
