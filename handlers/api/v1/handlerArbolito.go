@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"net/http"
 
 	"../../../handlers"
@@ -8,5 +9,6 @@ import (
 
 //AddArbolito agrega un arbol
 func AddArbolito(w http.ResponseWriter, r *http.Request) {
-	handlers.RecibirArchivo(r, "./recursos/", "ses")
+	err := handlers.RecibirArchivo(r, "./recursos/", "ses")
+	fmt.Println(err)
 }

@@ -22,7 +22,7 @@ func main() {
 	mux.HandleFunc("/api/v1/arbolito", v1.AddArbolito).Methods("POST")
 	fs := http.FileServer(http.Dir("recursos"))
 	mux.PathPrefix("/recursos/").Handler(http.StripPrefix("/recursos/", fs))
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":3000", mux))
 }
 
 func crearTablas() {
