@@ -9,8 +9,8 @@ import (
 )
 
 var username = "root"
-var contrasenia = ""
-var host = "localhost"
+var contrasenia = "73020075ce"
+var host = "127.0.0.1"
 var puerto = 3306
 var dbname = "Arbolito"
 
