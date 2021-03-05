@@ -12,7 +12,7 @@ type Arbol struct {
 	FechaNac    time.Time `json:"fechanac"`
 	DirFoto     string    `json:"dirfoto"`
 	IDPersona   int       `json:"idpersona"`
-	IDZonaVerde string    `json:"idzonaverde"`
+	IDZonaVerde int       `json:"idzonaverde"`
 }
 
 //Arboles array de arbol
@@ -38,13 +38,18 @@ func CrearTablaArbol() {
 }
 
 //AgregarArbol agregamos un arbol a la base de datos
-func (a *Arbol) AgregarArbol() error {
+func (a *Arbol) AgregarArbol() (int64, error) {
 	query := `INSERT INTO arbol(nombre,tipo,fechanac,dirfoto,persona_id,zonaverde_id) VALUE(?,?,?,?,?,?)`
 	var fn = FechaAString(a.FechaNac)
-	if _, err := EjecutarExec(query, &a.Nombre, &a.Tipo, fn, &a.DirFoto, &a.IDPersona, &a.IDZonaVerde); err != nil {
-		return err
+	resRow, err := EjecutarExec(query, &a.Nombre, &a.Tipo, fn, &a.DirFoto, &a.IDPersona, &a.IDZonaVerde)
+	if err != nil {
+		return 0, err
 	}
-	return nil
+	idlast, err2 := resRow.LastInsertId()
+	if err2 != nil {
+		return 0, err2
+	}
+	return idlast, nil
 }
 
 //ObtenerArbolByID crea un arbol relacionada a una persona y a su zona verde

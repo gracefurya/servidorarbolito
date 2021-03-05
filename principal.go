@@ -12,7 +12,7 @@ import (
 
 func main() {
 	crearTablas()
-	fmt.Println("hola")
+	fmt.Println("Servidor iniciado.....")
 	mux := mux.NewRouter()
 	mux.HandleFunc("/api/v1/persona/{idpersona:[0-9]+}", v1.GetPersonaByID).Methods("GET")
 	mux.HandleFunc("/api/v1/persona/ci/{cipersona}", v1.GetPersonaByCi).Methods("GET")
@@ -20,9 +20,10 @@ func main() {
 	mux.HandleFunc("/api/v1/distrito", v1.GetDistritos).Methods("GET")
 	mux.HandleFunc("/api/v1/zonaverde/distrito/{iddistrito:[0-9]+}", v1.GetZonasVerdesByDistrito).Methods("GET")
 	mux.HandleFunc("/api/v1/arbolito", v1.AddArbolito).Methods("POST")
+	mux.HandleFunc("/api/v1/persona/arboles/{idpersona}", v1.GetArbolesByPersonaCi).Methods("GET")
 	fs := http.FileServer(http.Dir("recursos"))
 	mux.PathPrefix("/recursos/").Handler(http.StripPrefix("/recursos/", fs))
-	log.Fatal(http.ListenAndServe(":3000", mux))
+	log.Fatal(http.ListenAndServe(":80", mux))
 }
 
 func crearTablas() {

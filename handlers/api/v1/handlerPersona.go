@@ -73,3 +73,18 @@ func AddPersona(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
+
+//GetArbolesByPersonaCi obtiene todos los arboles que tiene una persona
+func GetArbolesByPersonaCi(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		vars := mux.Vars(r)
+		idpersona, _ := strconv.Atoi(vars["idpersona"])
+		arboles, err := models.ObtenerArbolesByPersonaID(idpersona)
+		if err != nil {
+			models.SendUnprocessableEntity(w)
+		} else {
+			models.SendData(w, arboles)
+		}
+
+	}
+}
