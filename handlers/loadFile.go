@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 )
 
-const maxUploadSize = 2 * 1024 * 1024 //2MB
+const maxUploadSize = 15 * 1024 * 1024 //2MB
 
 //RecibirArchivo el archivo que el usuario intente subir se guardara
 func RecibirArchivo(r *http.Request, uploadPath, fileName string) error {
